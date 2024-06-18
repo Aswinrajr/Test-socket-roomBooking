@@ -1,14 +1,11 @@
-const allowedOrigins = [
-  "https://findmyhomestay.online",
-  "http://localhost:5173",
-  
-];
+const allowedOrigin = "https://test-frontend-roombooking.vercel.app";
 
-const io = require("socket.io")(8800, {         
+
+const io = require("socket.io")(8800, {
   cors: {
     origin: (origin, callback) => {
-      if (allowedOrigins.includes(origin) || !origin) {
-        callback(null, true);    
+      if (!origin || origin === allowedOrigin) {
+        callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS"));
       }
@@ -20,7 +17,7 @@ let activeUsers = [];
 
 io.on("connection", (socket) => {
   console.log("New user connected: ", socket.id);
-  console.log("Socket connected now :", socket.connected);
+  console.log("Socket connected now: ", socket.connected);
 
   socket.on("new-user-add", (newUserId) => {
     if (!activeUsers.some((user) => user.userId === newUserId)) {
