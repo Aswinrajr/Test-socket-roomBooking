@@ -1,4 +1,4 @@
-const allowedOrigin = "https://test-frontend-roombooking.vercel.app/chat";
+const allowedOrigin = "https://test-frontend-roombooking.vercel.app";
 
 
 const io = require("socket.io")(8800, {
